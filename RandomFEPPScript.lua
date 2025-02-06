@@ -91,14 +91,16 @@ UIAspectRatioConstraint.AspectRatio = 2.788
 
 -- Scripts:
 
-local function RIPGNF_script() -- TextButton.LocalScript 
+local function XHHAFR_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local pushed = true
+	local splattered = false
 	local accessoriesneeded = {
 		accessory1 = "Pal Hair",
 		accessory2 = "Pink Hair",
-		accessory3 = "Kate Hair"
+		accessory3 = "Kate Hair",
+		accessory4 = "Body Spots white"
 	}
 	
 	local function test(accessory)
@@ -169,6 +171,45 @@ local function RIPGNF_script() -- TextButton.LocalScript
 		end
 	end
 	
+	local function test4(accessory)
+		local plr = game.Players.LocalPlayer
+		local char = plr.Character
+		local foundaccess = char:FindFirstChild(accessory)
+		local handle = foundaccess and foundaccess:FindFirstChild("Handle")
+		if handle then
+			local mesh = handle:FindFirstChild("SpecialMesh")
+			if mesh then
+				local part = Instance.new("Part", char)
+				part.Name = "SplatterPart"
+				local weld = Instance.new("Weld", part)
+				weld.Part0 = part
+				weld.Part1 = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso")
+				local attachment = Instance.new("Attachment", part)
+				local attachment2 = Instance.new("Attachment", handle)
+				local align = Instance.new("AlignPosition", char)
+				align.Attachment0 = attachment2
+				align.Attachment1 = attachment
+				handle.AccessoryWeld:Destroy()
+				handle.BodyFrontAttachment:Destroy()
+				weld.C0 = CFrame.new(0, -10, 0)
+				align.Responsiveness = 1000
+				part.Transparency = 1
+				part.CanCollide = false
+                part.Size = Vector3.new(0.005, 0.005, 0.005)
+				part.Rotation = Vector3.new(90 + char:FindFirstChild("Torso").Orientation.X or char:FindFirstChild("UpperTorso").Orientation.X,0,0)
+	
+				wait(0.1)
+	
+				task.spawn(function()
+					while task.wait(0.01) do
+                        part.Rotation = Vector3.new(90 + char:FindFirstChild("Torso").Orientation.X or char:FindFirstChild("UpperTorso").Orientation.X,0,0)
+						handle.Orientation = part.Orientation
+					end
+				end)
+			end
+		end
+	end
+	
 	
 	local function test2(accessory)
 		local plr = game.Players.LocalPlayer
@@ -193,10 +234,11 @@ local function RIPGNF_script() -- TextButton.LocalScript
 				weld.C0 = CFrame.new(0, 1.2, 0.5)
 				align.Responsiveness = 1000
 				part.Transparency = 1
-				part.Rotation = Vector3.new(0,90 + char:FindFirstChild("Torso").Orientation.Y or char:FindFirstChild("UpperTorso").Orientation.Y,0)
+				part.Rotation = Vector3.new(0 ,90 + char:FindFirstChild("Torso").Orientation.Y or char:FindFirstChild("UpperTorso").Orientation.Y,0)
 				task.spawn(function()
 					test(accessoriesneeded.accessory1)
 					test3(accessoriesneeded.accessory3)
+					test4(accessoriesneeded.accessory4)
 				end)
 	
 				wait(0.25)
@@ -231,24 +273,49 @@ local function RIPGNF_script() -- TextButton.LocalScript
 				end
 			end
 		end
+		if input.KeyCode == Enum.KeyCode.C then
+			splattered = not splattered
+			if splattered == true then
+				local part = game.Players.LocalPlayer.Character:FindFirstChild("SplatterPart")
+				local weld = part:FindFirstChild("Weld")
+				if weld then
+                game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
+					weld.C0 = CFrame.new(0,2,4)
+                    wait(0.5)
+                    weld.C0 = CFrame.new(0,2.9,4)
+                    wait(2)
+                    
+                    game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = true
+                    splattered = false
+				end
+			else
+				local part = game.Players.LocalPlayer.Character:FindFirstChild("SplatterPart")
+				local weld = part:FindFirstChild("Weld")
+				if weld then
+                game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
+					weld.C0 = CFrame.new(0,-10,0)
+                    game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
+				end
+			end
+		end
 	end)
 end
-coroutine.wrap(RIPGNF_script)()
-local function DLMXN_script() -- TextButton_2.LocalScript 
+coroutine.wrap(XHHAFR_script)()
+local function ZWBJD_script() -- TextButton_2.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_2)
 
-	local message = "-gh 62724852 63690008 48474294"
+	local message = "-gh 62724852 63690008 48474294 13700376667"
 	
 	
 	script.Parent.MouseButton1Click:Connect(function()
 		game.TextChatService.TextChannels.RBXGeneral:SendAsync(message)
 	end)
 end
-coroutine.wrap(DLMXN_script)()
-local function ZULF_script() -- ScreenGui.LocalScript 
+coroutine.wrap(ZWBJD_script)()
+local function QORQ_script() -- ScreenGui.LocalScript 
 	local script = Instance.new('LocalScript', ScreenGui)
 
 	script.Parent.Frame.Draggable = true
 	script.Parent.Frame.Active = true
 end
-coroutine.wrap(ZULF_script)()
+coroutine.wrap(QORQ_script)()

@@ -262,9 +262,9 @@ local function DEGPLH_script() -- TextButton.LocalScript
 				part.Transparency = 1
 	
 				wait(0.1)
-	
-				task.spawn(function()
-					while task.wait(0.005) do
+
+                task.spawn(function()
+					while task.wait(0.01) do
 						handle.Orientation = part.Orientation
 					end
 				end)
@@ -330,7 +330,7 @@ local function DEGPLH_script() -- TextButton.LocalScript
 				align.Attachment0 = attachment2
 				align.Attachment1 = attachment
 				handle.AccessoryWeld:Destroy()
-				handle.BodyFrontAttachment:Destroy()
+				handle.WaistCenterAttachment:Destroy()
 				weld.C0 = CFrame.new(0, -10, 0)
 				align.Responsiveness = 1000
 				part.Transparency = 1
@@ -338,12 +338,6 @@ local function DEGPLH_script() -- TextButton.LocalScript
 				part.Size = Vector3.new(0.005, 0.005, 0.005)
 	
 				wait(0.1)
-	
-				task.spawn(function()
-					while task.wait(0.01) do
-						handle.Orientation = part.Orientation
-					end
-				end)
 			end
 		end
 	end
@@ -437,28 +431,26 @@ local function DEGPLH_script() -- TextButton.LocalScript
 			end
 		end
 		
-		if input.KeyCode == Enum.KeyCode.O then
+		if input.KeyCode == Enum.KeyCode.Q then
 			pissed = not pissed
 			if pissed == true then
 				local part = game.Players.LocalPlayer.Character:FindFirstChild("PissPart")
 				local weld = part:FindFirstChild("Weld")
 				if weld then
-					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
+					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory5).Handle.Anchored = false
 					weld.C0 = CFrame.new(0,2,4)
 					wait(0.5)
 					weld.C0 = CFrame.new(0,2.9,4)
 					wait(2)
 	
-					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = true
-					splattered = false
+					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory5).Handle.Anchored = true
+					pissed = false
 				end
 			else
 				local part = game.Players.LocalPlayer.Character:FindFirstChild("PissPart")
 				local weld = part:FindFirstChild("Weld")
 				if weld then
-					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
-					weld.C0 = CFrame.new(0,-10,0)
-					game.Players.LocalPlayer.Character:FindFirstChild(accessoriesneeded.accessory4).Handle.Anchored = false
+					return
 				end
 			end
 		end
